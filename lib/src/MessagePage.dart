@@ -59,7 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      bottomNavigationBar: Toolbar(""),
+      bottomNavigationBar: Toolbar(),
       body: SafeArea(
         child: Column(
           children: [
