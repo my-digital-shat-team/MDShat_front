@@ -9,7 +9,7 @@
 
 Complete tutorial : https://flutter.dev/docs/get-started/install/windows
 
-# On global
+###### On global
 
 ```sh
 git clone https://github.com/flutter/flutter.git -b stable
@@ -20,12 +20,12 @@ install flutter, then add "flutter/bin" to variable env
 flutter doctor
 ```
 
-# On Android Studio
+###### On Android Studio
 
 settings/plugins, install flutter
 settings/Languages & Frameworks/Flutter set SDK path to your flutter folder
 
-# Troubleshooting
+## Troubleshooting
 
 click "AVD Manager" for start virtual device
 
@@ -35,7 +35,7 @@ flutter doctor --android-licenses
 
 ## 📊 Usage
 
-# On Android Studio
+###### On Android Studio
 
 ```sh
 maj + F10
