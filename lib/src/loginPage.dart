@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     ),
       onTap: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => MessagePage()));
       },
 );
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
       },
       child: Container(

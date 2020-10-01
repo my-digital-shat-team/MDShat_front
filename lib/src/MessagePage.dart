@@ -21,26 +21,15 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(child: Text(_name[0] + _name[1])),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  child: Text(text),
-                ),
-              ],
-            ),
-          ],
-        )
+    return Row(
+      children: [
+        Container(margin: EdgeInsets.only(left: 5.0, top: 5.0), child: CircleAvatar(child: Text(_name[0] + _name[1]))),
+        Flexible(
+          fit: FlexFit.loose,
+          flex: 1,
+          child: Container(margin: EdgeInsets.only(left: 5.0, top: 5.0) , child: Text(text)),
+        ),
+      ],
     );
   }
 }
@@ -58,17 +47,13 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Row(
               children: [
-                _backButton(),
+                //_backButton(),
               ],
             ),
             Flexible(
@@ -130,7 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 4.0),
               child: IconButton(
-                  icon: const Icon(Icons.send),
+                  icon: Icon(Icons.send, color: Color(0xfff2aabb7)),
                   onPressed: () => _handleSubmitted(_textController.text)),
             )
           ],

@@ -17,7 +17,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 1), () {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginPage()));
     });
     super.initState();
