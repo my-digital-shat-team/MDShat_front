@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_digital_shat/src/Toolbar.dart';
 import 'package:my_digital_shat/src/widget/bezierContainer.dart';
 
 String _name = 'Evan JUGE';
@@ -17,7 +18,6 @@ class MessagePage extends StatelessWidget {
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.text});
   final String text;
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +40,9 @@ class ChatMessage extends StatelessWidget {
               ],
             ),
           ],
-        )
-    );
+        ));
   }
 }
-
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -58,11 +56,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      bottomNavigationBar: Toolbar(""),
       body: SafeArea(
         child: Column(
           children: [
@@ -81,8 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Divider(height: 1.0),
             Container(
-              decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor),
+              decoration: BoxDecoration(color: Theme.of(context).cardColor),
               child: _buildTextComposer(),
             ),
           ],
@@ -123,7 +119,8 @@ class _ChatScreenState extends State<ChatScreen> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: InputDecoration.collapsed(hintText: 'Envoyer un message'),
+                decoration:
+                    InputDecoration.collapsed(hintText: 'Envoyer un message'),
                 focusNode: _focusNode,
               ),
             ),
