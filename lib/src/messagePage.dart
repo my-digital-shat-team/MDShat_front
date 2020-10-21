@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_digital_shat/src/model/message.dart';
 import 'package:my_digital_shat/src/widget/bezierContainer.dart';
 
 String _name = 'Evan JUGE';
@@ -52,10 +53,10 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           children: [
             Row(
-              children: [
-                //_backButton(),
-              ],
-            ),
+            children: [
+            _backButton(),
+        ],
+      ),
             Flexible(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),

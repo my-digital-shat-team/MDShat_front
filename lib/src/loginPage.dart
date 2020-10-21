@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/src/MessagePage.dart';
+import 'package:my_digital_shat/src/messagePage.dart';
+import 'package:my_digital_shat/src/recentChats.dart';
 import 'package:my_digital_shat/src/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
     ),
       onTap: () {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MessagePage()));
+            context, MaterialPageRoute(builder: (context) => RecentChats()));
       },
 );
   }
