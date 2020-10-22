@@ -36,9 +36,11 @@ class RecentChats extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 20.0),
                   padding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   decoration: BoxDecoration(
-                    color: chat.unread ? Color(0xff2aabb7).withOpacity(0.3) : Colors.white,
+                    color: chat.unread
+                        ? Color(0xff2aabb7).withOpacity(0.3)
+                        : Colors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20.0),
                       bottomRight: Radius.circular(20.0),
@@ -48,7 +50,10 @@ class RecentChats extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Row(
-                        children: <Widget>[CircleAvatar(child: Text(chat.sender.name[0] + chat.sender.name[1])),
+                        children: <Widget>[
+                          CircleAvatar(
+                              child: Text(
+                                  chat.sender.name[0] + chat.sender.name[1])),
                           SizedBox(width: 10.0),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,11 +73,10 @@ class RecentChats extends StatelessWidget {
                                 child: Text(
                                   chat.text,
                                   style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.none
-                                  ),
+                                      color: Colors.black45,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w600,
+                                      decoration: TextDecoration.none),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -85,11 +89,10 @@ class RecentChats extends StatelessWidget {
                           Text(
                             chat.time,
                             style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.none
-                            ),
+                                color: Colors.grey,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.none),
                           ),
                         ],
                       ),
