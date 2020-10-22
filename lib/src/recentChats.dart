@@ -46,11 +46,7 @@ class RecentChats extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Row(
-                        children: <Widget>[
-                          CircleAvatar(
-                            radius: 35.0,
-                            backgroundImage: AssetImage(chat.sender.imageUrl),
-                          ),
+                        children: <Widget>[CircleAvatar(child: Text(chat.sender.name[0] + chat.sender.name[1])),
                           SizedBox(width: 10.0),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
