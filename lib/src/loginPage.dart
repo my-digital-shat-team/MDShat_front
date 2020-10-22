@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/src/MessagePage.dart';
+import 'package:my_digital_shat/src/messagePage.dart';
+import 'package:my_digital_shat/src/recentChats.dart';
 import 'package:my_digital_shat/src/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -64,8 +65,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     ),
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MessagePage()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => RecentChats()));
       },
 );
   }
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
       },
       child: Container(

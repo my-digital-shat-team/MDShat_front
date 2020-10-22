@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_digital_shat/src/model/message.dart';
+import 'package:my_digital_shat/src/Toolbar.dart';
 import 'package:my_digital_shat/src/widget/bezierContainer.dart';
 
 String _name = 'Evan JUGE';
@@ -18,22 +20,30 @@ class ChatMessage extends StatelessWidget {
   ChatMessage({this.text});
   final String text;
 
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(child: Text(_name[0] + _name[1])),
-        Flexible(
-          fit: FlexFit.loose,
-          flex: 1,
-          child: Text(text),
-        ),
-      ],
-    );
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 16.0),
+              child: CircleAvatar(child: Text(_name[0] + _name[1])),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 5.0),
+                  child: Text(text),
+                ),
+              ],
+            ),
+          ],
+        ));
   }
 }
-
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -41,17 +51,16 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final List<ChatMessage> _messages = [];
+  final List<Message> _messages = messages;
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-
-
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      bottomNavigationBar: Toolbar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -70,8 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Divider(height: 1.0),
             Container(
-              decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor),
+              decoration: BoxDecoration(color: Theme.of(context).cardColor),
               child: _buildTextComposer(),
             ),
           ],
@@ -112,14 +120,15 @@ class _ChatScreenState extends State<ChatScreen> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: InputDecoration.collapsed(hintText: 'Envoyer un message'),
+                decoration:
+                    InputDecoration.collapsed(hintText: 'Envoyer un message'),
                 focusNode: _focusNode,
               ),
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 4.0),
               child: IconButton(
-                  icon: const Icon(Icons.send),
+                  icon: Icon(Icons.send, color: Color(0xfff2aabb7)),
                   onPressed: () => _handleSubmitted(_textController.text)),
             )
           ],
@@ -130,7 +139,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
-    ChatMessage message = ChatMessage(
+    Message message = Message(
       text: text,
     );
     setState(() {

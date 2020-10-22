@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/loginPage.dart';
-import 'package:my_digital_shat/src/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -17,7 +16,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 1), () {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginPage()));
     });
     super.initState();
