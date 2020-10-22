@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/widget/bezierContainer.dart';
 import 'package:my_digital_shat/src/loginPage.dart';
@@ -13,6 +15,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  static final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -26,19 +29,39 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
+              validator: (value) {
+                if (!isPassword) {
+                  bool emailValid = RegExp(r'^[\w-\.]+@my-digital-school.org').hasMatch(value);
+                  if (value.isEmpty) {
+                    return 'Veuillez entrer du texte';
+                  } else if (!emailValid){
+                    return 'Veuillez entrer un email valide et de l\'école';
+                  } else {
+                    return null;
+                  }
+                } else {
+                  if (value.isEmpty){
+                    return 'Veuillez entrer du texte';
+                  } else {
+                    return null;
+                  }
+                }
+              },
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Color(0xfff3f3f4),
-                  filled: true))
+                  filled: true)
+          )
         ],
       ),
     );
   }
 
-  Widget _submitButton() {
-    return Container(
+  Widget _submitButton(_formKey) {
+    return InkWell(
+    child: Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(vertical: 15),
       alignment: Alignment.center,
@@ -59,6 +82,12 @@ class _SignUpPageState extends State<SignUpPage> {
         'Inscription',
         style: TextStyle(fontSize: 20, color: Colors.white),
       ),
+    ),
+        onTap: () {
+          if (_formKey.currentState.validate()) {
+            print('oui');
+          }
+        }
     );
   }
 
@@ -131,7 +160,9 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return Form(
+      key: _formKey,
+      child: Scaffold(
       body: Container(
         height: height,
         child: Stack(
@@ -157,7 +188,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    _submitButton(),
+                    _submitButton(_formKey),
                     SizedBox(height: height * .14),
                     _loginAccountLabel(),
                   ],
@@ -167,6 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ],
         ),
       ),
+    ),
     );
   }
 }

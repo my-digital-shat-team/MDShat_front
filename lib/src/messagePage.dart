@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/model/message.dart';
-import 'package:my_digital_shat/src/widget/bezierContainer.dart';
-
-String _name = 'Evan JUGE';
+import 'package:my_digital_shat/src/Toolbar.dart';
 
 class MessagePage extends StatelessWidget {
   const MessagePage({
@@ -12,35 +10,6 @@ class MessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChatScreen();
-  }
-}
-
-class ChatMessage extends StatelessWidget {
-  ChatMessage({this.text});
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(child: Text(_name[0] + _name[1])),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  child: Text(text),
-                ),
-              ],
-            ),
-          ],
-        ));
   }
 }
 
@@ -56,9 +25,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      bottomNavigationBar: Toolbar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -138,6 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void _handleSubmitted(String text) {
     _textController.clear();
     Message message = Message(
+      sender: currentUser,
       text: text,
     );
     setState(() {

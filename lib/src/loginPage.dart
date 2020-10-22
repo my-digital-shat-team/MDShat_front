@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/src/messagePage.dart';
 import 'package:my_digital_shat/src/recentChats.dart';
 import 'package:my_digital_shat/src/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -139,16 +138,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-          height: height,
+          height: MediaQuery.of(context).size.height,
           child: Stack(
             children: <Widget>[
               Positioned(
-                  top: -height * .15,
+                  top: -MediaQuery.of(context).size.height * .15,
                   right: -MediaQuery.of(context).size.width * .4,
-                  child: BezierContainer()),
+                  child: BezierContainer()
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: SingleChildScrollView(
@@ -156,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: height * .2),
+                      SizedBox(height: MediaQuery.of(context).size.height * .2),
                       _title(),
                       SizedBox(height: 50),
                       _emailPasswordWidget(),
@@ -169,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w500)),
                       ),
-                      SizedBox(height: height * .055),
+                      SizedBox(height: MediaQuery.of(context).size.height * .055),
                       _createAccountLabel(),
                     ],
                   ),
