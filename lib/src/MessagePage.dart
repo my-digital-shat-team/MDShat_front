@@ -21,26 +21,15 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(child: Text(_name[0] + _name[1])),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  child: Text(text),
-                ),
-              ],
-            ),
-          ],
-        )
+    return Row(
+      children: [
+        CircleAvatar(child: Text(_name[0] + _name[1])),
+        Flexible(
+          fit: FlexFit.loose,
+          flex: 1,
+          child: Text(text),
+        ),
+      ],
     );
   }
 }
