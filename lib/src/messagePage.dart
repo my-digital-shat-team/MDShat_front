@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/model/message.dart';
-import 'package:my_digital_shat/src/Toolbar.dart';
 import 'package:my_digital_shat/src/widget/bezierContainer.dart';
 
 String _name = 'Evan JUGE';
@@ -60,7 +59,6 @@ class _ChatScreenState extends State<ChatScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      bottomNavigationBar: Toolbar(),
       body: SafeArea(
         child: Column(
           children: [
