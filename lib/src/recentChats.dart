@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/model/message.dart';
+import 'package:my_digital_shat/src/Toolbar.dart';
 
 import 'messagePage.dart';
 
 class RecentChats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return Scaffold(
+      bottomNavigationBar: Toolbar(),
+      body: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
