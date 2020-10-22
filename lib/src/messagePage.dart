@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/model/message.dart';
+import 'package:my_digital_shat/src/Toolbar.dart';
+import 'package:my_digital_shat/src/widget/bezierContainer.dart';
 
 String _name = 'Evan JUGE';
 
@@ -14,6 +16,34 @@ class MessagePage extends StatelessWidget {
   }
 }
 
+class ChatMessage extends StatelessWidget {
+  ChatMessage({this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 16.0),
+              child: CircleAvatar(child: Text(_name[0] + _name[1])),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 5.0),
+                  child: Text(text),
+                ),
+              ],
+            ),
+          ],
+        ));
+  }
+}
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -27,15 +57,18 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      bottomNavigationBar: Toolbar(),
       body: SafeArea(
         child: Column(
           children: [
             Row(
-            children: [
-            _backButton(),
-        ],
-      ),
+              children: [
+                _backButton(),
+              ],
+            ),
             Flexible(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
@@ -46,8 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Divider(height: 1.0),
             Container(
-              decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor),
+              decoration: BoxDecoration(color: Theme.of(context).cardColor),
               child: _buildTextComposer(),
             ),
           ],
@@ -88,7 +120,8 @@ class _ChatScreenState extends State<ChatScreen> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: InputDecoration.collapsed(hintText: 'Envoyer un message'),
+                decoration:
+                    InputDecoration.collapsed(hintText: 'Envoyer un message'),
                 focusNode: _focusNode,
               ),
             ),

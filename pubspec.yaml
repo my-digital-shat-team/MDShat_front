@@ -26,6 +26,7 @@ dependencies:
   google_fonts: ^1.1.0
   bubble: ^1.1.9+1
   faker: ^1.2.1
+  material_design_icons_flutter: 4.0.5655
 
 
   # The following adds the Cupertino Icons font to your application.
