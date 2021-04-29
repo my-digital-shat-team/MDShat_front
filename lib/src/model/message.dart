@@ -5,8 +5,7 @@ import 'package:faker/faker.dart';
 
 class Message extends StatelessWidget {
   final User sender;
-  final String
-  time;
+  final String time;
   final String text;
   final bool unread;
 
@@ -19,16 +18,32 @@ class Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // this condition is based on the fact that the current user has no name, but be careful if a user has only 1 letter in his name.
+    bool isCurrentUser = sender.name.length >= 2;
+
     return Row(
       children: [
-        Container(margin: EdgeInsets.only(left: 5.0, top: 5.0), child: CircleAvatar(child: Text(sender.name[0] + sender.name[1])
-          )
+        Container(
+          margin: EdgeInsets.only(left: 5.0),
+          child: isCurrentUser
+              ? CircleAvatar(child: Text(sender.name[0] + sender.name[1]))
+              : Container(),
         ),
         Flexible(
           fit: FlexFit.loose,
           flex: 1,
-          child: Container(margin: EdgeInsets.only(left: 5.0, top: 5.0) , child: Text(text)),
+          child: Container(
+              margin: EdgeInsets.only(left: 10.0),
+              child: Align(
+                alignment: isCurrentUser
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight,
+                child: Text(
+                  text,
+                ),
+              )),
         ),
+        Container(height: 50.0),
       ],
     );
   }
@@ -38,7 +53,7 @@ var faker = new Faker();
 
 final User currentUser = User(
   id: 0,
-  name: 'Current User',
+  name: '',
 );
 
 final User greg = User(
