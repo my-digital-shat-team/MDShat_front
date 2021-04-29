@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_digital_shat/app/bloc/app_bloc.dart';
-import 'package:my_digital_shat/home/widgets/avatar.dart';
+import 'package:my_digital_shat/app/view/toolbar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static Page page() => MaterialPage<void>(child: HomePage());
 
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => HomePage());
+  }
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
+      bottomNavigationBar: Toolbar(),
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Accueil'),
         actions: <Widget>[
           IconButton(
             key: const Key('homePage_logout_iconButton'),
@@ -26,11 +36,12 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Avatar(photo: user.photo),
+            Text('Bienvenue', style: textTheme.headline6),
             const SizedBox(height: 4.0),
             Text(user.email ?? '', style: textTheme.headline6),
             const SizedBox(height: 4.0),
             Text(user.name ?? '', style: textTheme.headline5),
+            const SizedBox(height: 4.0),
           ],
         ),
       ),

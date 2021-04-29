@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:my_digital_shat/home/home.dart';
 import 'package:my_digital_shat/model/message.dart';
 
-class MessagePage extends StatelessWidget {
+class ChatPage extends StatelessWidget {
+  static Page page() => MaterialPage<void>(child: Chat());
+
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => ChatScreen());
+    return MaterialPageRoute<void>(builder: (_) => Chat());
   }
 
-  const MessagePage({
+  const ChatPage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChatScreen();
+    return Chat();
   }
 }
 
-class ChatScreen extends StatefulWidget {
+class Chat extends StatefulWidget {
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _ChatState createState() => _ChatState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  final List<Message> _messages = messages;
+class _ChatState extends State<Chat> {
+  final List<Message> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -58,9 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _backButton() {
     return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
+      onTap: () => Navigator.of(context).push<void>(HomePage.route()),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Row(
@@ -107,13 +108,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
-    Message message = Message(
-      sender: currentUser,
-      text: text,
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
     _focusNode.requestFocus();
   }
 }
