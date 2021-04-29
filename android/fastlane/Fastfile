@@ -5,8 +5,8 @@ platform :android do
   lane :distribute_android_app do
       firebase_app_distribution(
           app: ENV["FIREBASE_APP_ID"],
-          testers: "llanta.jeremy@gmail.com",
-          release_notes: "Test",
+          testers: "llanta.jeremy@gmail.com, mayeut@gmail.com, evan.jug@gmail.com, alexis.pannetier@hotmail.fr, dylan.tardif1@gmail.com, cedricbardaine@gmail.com",
+          release_notes: "🚀 Une nouvelle version est à tester ! 🚀",
           firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
           apk_path: "../build/app/outputs/apk/release/app-release.apk"
       )
