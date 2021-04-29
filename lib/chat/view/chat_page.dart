@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/home/home.dart';
 import 'package:my_digital_shat/model/message.dart';
 
 class ChatPage extends StatelessWidget {
@@ -61,7 +60,9 @@ class _ChatState extends State<Chat> {
 
   Widget _backButton() {
     return InkWell(
-      onTap: () => Navigator.of(context).push<void>(HomePage.route()),
+      onTap: () {
+        Navigator.pop(context);
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Row(
@@ -108,6 +109,15 @@ class _ChatState extends State<Chat> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
+    Message message = Message(
+      content: text,
+      channelId: '1',
+      id: '1',
+      userId: '1',
+    );
+    setState(() {
+      _messages.insert(0, message);
+    });
     _focusNode.requestFocus();
   }
 }
