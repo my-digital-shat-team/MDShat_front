@@ -5,10 +5,10 @@ import 'package:faker/faker.dart';
 
 class Message extends StatelessWidget {
   final User sender;
-  final String
-  time;
+  final String time;
   final String text;
   final bool unread;
+  bool isCurrentUser;
 
   Message({
     this.sender,
@@ -19,17 +19,22 @@ class Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(margin: EdgeInsets.only(left: 5.0, top: 5.0), child: CircleAvatar(child: Text(sender.name[0] + sender.name[1])
-          )
-        ),
-        Flexible(
-          fit: FlexFit.loose,
-          flex: 1,
-          child: Container(margin: EdgeInsets.only(left: 5.0, top: 5.0) , child: Text(text)),
-        ),
-      ],
+    this.isCurrentUser = sender.name == 'Current User';
+    return Container(
+      margin: EdgeInsets.only(bottom: 10.0),
+      decoration: BoxDecoration(
+      color: isCurrentUser ? Color(0xff0084ff) : Color(0xffe4e6eb),
+      borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      child: Row(
+        textDirection: isCurrentUser ? TextDirection.rtl : TextDirection.ltr,
+        children: [
+          Container(margin: EdgeInsets.all(8.0), child: CircleAvatar(child: Text(sender.name[0] + sender.name[1]) ),
+          ),
+          Flexible(
+            child: Container(margin: EdgeInsets.all(8.0) , child: Text(text, style: TextStyle(color: isCurrentUser ? Colors.white : Colors.black))),
+          ),
+        ],),
     );
   }
 }
