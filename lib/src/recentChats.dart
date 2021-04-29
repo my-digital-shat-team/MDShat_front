@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/model/message.dart';
-import 'package:my_digital_shat/src/Toolbar.dart';
+import 'package:my_digital_shat/src/toolbar.dart';
 
 import 'messagePage.dart';
 
