@@ -19,31 +19,50 @@ class Message extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // this condition is based on the fact that the current user has no name, but be careful if a user has only 1 letter in his name.
-    bool isCurrentUser = sender.name.length >= 2;
+    bool isCurrentUser = this.sender.name.length >= 2;
 
-    return Row(
+    return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 5.0),
-          child: isCurrentUser
-              ? CircleAvatar(child: Text(sender.name[0] + sender.name[1]))
-              : Container(),
+          // color: Colors.orange,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              this.time != null ? this.time.toString() : "--:--",
+              style: TextStyle(color: Colors.black54),
+            ),
+          ),
         ),
-        Flexible(
-          fit: FlexFit.loose,
-          flex: 1,
-          child: Container(
-              margin: EdgeInsets.only(left: 10.0),
-              child: Align(
-                alignment: isCurrentUser
-                    ? Alignment.centerLeft
-                    : Alignment.centerRight,
-                child: Text(
-                  text,
-                ),
-              )),
+        Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 5.0),
+              child: isCurrentUser
+                  ? CircleAvatar(child: Text(sender.name[0] + sender.name[1]))
+                  : Container(),
+            ),
+            Flexible(
+              fit: FlexFit.loose,
+              flex: 1,
+              child: Container(
+                  margin: EdgeInsets.only(left: 10.0),
+                  child: Align(
+                    alignment: isCurrentUser
+                        ? Alignment.centerLeft
+                        : Alignment.centerRight,
+                    child: Text(
+                      this.text,
+                      textAlign:
+                          isCurrentUser ? TextAlign.start : TextAlign.end,
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  )),
+            ),
+          ],
         ),
-        Container(height: 50.0),
+        Container(
+          height: 20.0,
+        ),
       ],
     );
   }
