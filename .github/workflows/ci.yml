@@ -35,7 +35,7 @@ jobs:
       - name: Build APK
         run: flutter build apk
 
-      - name: Distribute Android Beta App
+      - name: Distribute Android App
         working-directory: ${{ github.workspace }}/android
         run: bundle exec fastlane distribute_android_app
         env:
