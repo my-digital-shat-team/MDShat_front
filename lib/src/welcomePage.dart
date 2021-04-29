@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/loginPage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -84,3 +85,4 @@ class _WelcomePageState extends State<WelcomePage> {
 }
 
 
+*/

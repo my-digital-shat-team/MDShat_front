@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/app/view/toolbar.dart';
 import 'package:my_digital_shat/src/model/message.dart';
@@ -107,3 +108,4 @@ class RecentChats extends StatelessWidget {
     );
   }
 }
+*/

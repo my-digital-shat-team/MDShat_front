@@ -8,7 +8,7 @@ import 'message_state.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final MessageRepository _messageRepository;
-  late StreamSubscription _messageSubscription;
+  StreamSubscription? _messageSubscription;
 
   MessageBloc({required MessageRepository messageRepository})
       : _messageRepository = messageRepository,
@@ -17,7 +17,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
   @override
   Stream<MessageState> mapEventToState(MessageEvent messageEvent) async* {
     if (messageEvent is MessageEventQueryAll) {
-      _messageSubscription.cancel();
+      _messageSubscription?.cancel();
       _messageSubscription = _messageRepository.messages().listen(
             (message) => add(MessageEventUpdated(message)),
           );
@@ -34,7 +34,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
 
   @override
   Future<void> close() {
-    _messageSubscription.cancel();
+    _messageSubscription?.cancel();
     return super.close();
   }
 }
