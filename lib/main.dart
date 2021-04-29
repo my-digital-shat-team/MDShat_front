@@ -1,25 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:authentication_repository/authentication_repository.dart';
+import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/widgets.dart';
 
-import 'src/welcomePage.dart';
+import 'app/bloc_observer.dart';
+import 'app/view/app.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return MaterialApp(
-      title: 'MyDigitalShat',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme:GoogleFonts.latoTextTheme(textTheme).copyWith(
-          bodyText1: GoogleFonts.montserrat(textStyle: textTheme.bodyText1),
-        ),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
-    );
-  }
+void main() async {
+  Bloc.observer = AppBlocObserver();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  final authenticationRepository = AuthenticationRepository();
+  await authenticationRepository.user.first;
+  runApp(App(authenticationRepository: authenticationRepository));
 }
