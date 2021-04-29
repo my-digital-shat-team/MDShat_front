@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/src/model/message.dart';
+import 'package:my_digital_shat/model/message.dart';
 
 class MessagePage extends StatelessWidget {
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => ChatScreen());
+  }
+
   const MessagePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

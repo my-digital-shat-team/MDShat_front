@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_digital_shat/app/view/toolbar.dart';
 import 'package:my_digital_shat/src/model/message.dart';
-import 'package:my_digital_shat/src/toolbar.dart';
 
-import 'messagePage.dart';
+import '../chat/view/messagePage.dart';
 
 class RecentChats extends StatelessWidget {
   @override

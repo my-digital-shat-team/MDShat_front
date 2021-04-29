@@ -1,4 +1,4 @@
-import 'dart:math';
+cimport 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/widget/bezierContainer.dart';
