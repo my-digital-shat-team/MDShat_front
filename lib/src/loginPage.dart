@@ -15,7 +15,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Widget _entryField(String title, {bool isPassword = false}) {
+  final _text = TextEditingController();
+  bool _validate = false;
+
+  Widget _entryField(String title, {bool isPassword = false, bool isEmail = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -29,11 +32,19 @@ class _LoginPageState extends State<LoginPage> {
             height: 10,
           ),
           TextField(
+              controller: _text,
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Color(0xfff3f3f4),
-                  filled: true))
+                  filled: true,
+                  errorText: isEmail ? (_validate ? null : 'Un email my-digital-school.org est requis') : null),
+              onChanged: (text) {
+                setState(() {
+                  _text.text.contains(RegExp(r'^[A-Za-z0-9._%+-]+@my-digital-school.org$')) ? _validate = true : _validate = false;
+                });
+              }
+            )
         ],
       ),
     );
@@ -130,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email"),
+        _entryField("Email", isEmail: true),
         _entryField("Mot de passe", isPassword: true),
       ],
     );
