@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_digital_shat/src/model/message.dart';
-import 'package:my_digital_shat/src/Toolbar.dart';
 
 class MessagePage extends StatelessWidget {
   const MessagePage({
@@ -26,7 +25,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Toolbar(),
       body: SafeArea(
         child: Column(
           children: [
