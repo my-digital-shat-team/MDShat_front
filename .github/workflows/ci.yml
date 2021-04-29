@@ -15,7 +15,7 @@ jobs:
       - name: install firebase tool
         run: |
           yarn global add firebase-tools
-          echo "::add-path::$(yarn global bin)"
+          echo "$(yarn global bin)" >> $GITHUB_PATH
       - name: setup fastlane
         run: bundle install
       - name: distribute to firebase
