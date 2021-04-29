@@ -1,34 +1,55 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/model/user.dart';
 
-class Message extends StatelessWidget {
-  final User sender;
-  final String time;
-  final String text;
-  final bool unread;
+@immutable
+class Message {
+  final String id;
+  final String userId;
+  final String channelId;
+  final String content;
 
-  Message({
-    required this.sender,
-    required this.time,
-    required this.text,
-    required this.unread,
-  });
+  Message(
+      {required this.id,
+      required this.userId,
+      required this.channelId,
+      required this.content});
+
+  Message copyWith({id, userId, channelId, content}) {
+    return Message(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      channelId: channelId ?? this.channelId,
+      content: content ?? this.content,
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-            margin: EdgeInsets.only(left: 5.0, top: 5.0),
-            child: CircleAvatar(child: Text(sender.name[0] + sender.name[1]))),
-        Flexible(
-          fit: FlexFit.loose,
-          flex: 1,
-          child: Container(
-              margin: EdgeInsets.only(left: 5.0, top: 5.0), child: Text(text)),
-        ),
-      ],
-    );
+  String toString() {
+    return 'Message{id: $id, userId: $userId, channelId: $channelId, content: $content}';
+  }
+
+  static Message fromJson(Map<String, Object> json) {
+    return Message(
+        id: json["id"] as String,
+        content: json["content"] as String,
+        channelId: json["channelId"] as String,
+        userId: json["userId"] as String);
+  }
+
+  static Message fromSnapshot(DocumentSnapshot snap) {
+    return Message(
+        id: snap.id,
+        content: snap.data()!['content'],
+        channelId: snap.data()!['channelId'],
+        userId: snap.data()!['userId']);
+  }
+
+  Map<String, Object> toJson() {
+    return {
+      "id": this.id,
+      "content": this.content,
+      "channelId": this.channelId,
+      "userId": this.userId,
+    };
   }
 }
