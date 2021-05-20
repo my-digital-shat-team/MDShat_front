@@ -22,7 +22,7 @@ class FirebaseMessageRepository implements MessageRepository {
 
   @override
   Stream<List<Message>> messages() {
-    return messageCollection.snapshots().map((snapshot) {
+    return messageCollection.orderBy('sendAt').snapshots().map((snapshot) {
       return snapshot.docs
           .map((document) => Message.fromSnapshot(document))
           .toList();
