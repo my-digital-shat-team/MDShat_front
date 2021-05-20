@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "941209673879",
+    "firebase_url": "https://mdshat-1ae4d.firebaseio.com",
+    "project_id": "mdshat-1ae4d",
+    "storage_bucket": "mdshat-1ae4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941209673879:android:5e55a82b403af8f30e89d2",
+        "android_client_info": {
+          "package_name": "fr.mds.my_digital_shat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941209673879-qrn0mafj8sip8ip0b8f72q4l77vvq7et.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmGgQB5eR4y6avE1bpfnZ1a__EDM5ia6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941209673879-qrn0mafj8sip8ip0b8f72q4l77vvq7et.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
