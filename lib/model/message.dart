@@ -64,7 +64,7 @@ class Message extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerRight,
             child: Text(
-              this.sendAt.toString(),
+              this.sendAt.hour.toString() + '-' + this.sendAt.minute.toString(),
               style: TextStyle(color: Colors.black54),
             ),
           ),
