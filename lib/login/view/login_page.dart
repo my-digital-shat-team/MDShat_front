@@ -13,15 +13,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: BlocProvider(
-            create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
-            child: LoginForm(),
-          ),
-        ),
+    return Scaffold(
+      body: BlocProvider(
+        create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
+        child: LoginForm(),
       ),
     );
   }

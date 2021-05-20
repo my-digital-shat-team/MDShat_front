@@ -11,17 +11,18 @@ class FirebaseMessageRepository implements MessageRepository {
   @override
   Future<void> addNewMessage(Message message) {
     final x = message.toJson();
+    x.remove("uid");
     return messageCollection.add(x);
   }
 
   @override
   Future<void> deleteMessage(Message message) async {
-    return messageCollection.doc(message.id).delete();
+    return messageCollection.doc(message.uid).delete();
   }
 
   @override
   Stream<List<Message>> messages() {
-    return messageCollection.snapshots().map((snapshot) {
+    return messageCollection.orderBy('sendAt').snapshots().map((snapshot) {
       return snapshot.docs
           .map((document) => Message.fromSnapshot(document))
           .toList();
@@ -31,7 +32,7 @@ class FirebaseMessageRepository implements MessageRepository {
   @override
   Future<void> updateMessage(Message updatedMessage) {
     return messageCollection
-        .doc(updatedMessage.id)
+        .doc(updatedMessage.uid)
         .update(updatedMessage.toJson());
   }
 }

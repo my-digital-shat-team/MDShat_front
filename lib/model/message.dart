@@ -3,48 +3,49 @@ import 'package:flutter/material.dart';
 
 @immutable
 class Message extends StatelessWidget {
-  final String id;
+  final String uid;
   final String userId;
-  final String channelId;
   final String content;
+  final DateTime sendAt;
 
   Message(
-      {required this.id,
-      required this.userId,
-      required this.channelId,
-      required this.content});
+      {required this.userId,
+      required this.content,
+      required this.sendAt,
+      this.uid = ""});
 
-  Message copyWith({id, userId, channelId, content}) {
+  Message copyWith({userId, sendAt, content, uid}) {
     return Message(
-      id: id ?? this.id,
+      uid: uid ?? this.uid,
       userId: userId ?? this.userId,
-      channelId: channelId ?? this.channelId,
       content: content ?? this.content,
+      sendAt: sendAt ?? this.sendAt,
     );
   }
 
   static Message fromJson(Map<String, Object> json) {
     return Message(
-        id: json["id"] as String,
-        content: json["content"] as String,
-        channelId: json["channelId"] as String,
-        userId: json["userId"] as String);
+      uid: json["uid"] as String,
+      content: json["content"] as String,
+      userId: json["userId"] as String,
+      sendAt: json["sendAt"] as DateTime,
+    );
   }
 
   static Message fromSnapshot(DocumentSnapshot snap) {
     return Message(
-        id: snap.id,
+        uid: snap.data()!['uid'],
         content: snap.data()!['content'],
-        channelId: snap.data()!['channelId'],
-        userId: snap.data()!['userId']);
+        userId: snap.data()!['userId'],
+        sendAt: DateTime.parse(snap.data()!['sendAt'].toDate().toString()));
   }
 
   Map<String, Object> toJson() {
     return {
-      "id": this.id,
+      "uid": this.uid,
       "content": this.content,
-      "channelId": this.channelId,
       "userId": this.userId,
+      "sendAt": this.sendAt,
     };
   }
 
@@ -57,7 +58,7 @@ class Message extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerRight,
             child: Text(
-              "--:--",
+              this.sendAt.toString(),
               style: TextStyle(color: Colors.black54),
             ),
           ),
