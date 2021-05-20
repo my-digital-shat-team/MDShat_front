@@ -7,6 +7,17 @@ import 'package:my_digital_shat/chat/widget/message/messages.dart';
 import 'package:my_digital_shat/home/view/home_page.dart';
 import 'package:my_digital_shat/model/message.dart';
 
+extension CapExtension on String {
+  String get inCaps =>
+      this.length > 0 ? '${this[0].toUpperCase()}${this.substring(1)}' : '';
+  String get allInCaps => this.toUpperCase();
+  String get capitalizeFirstofEach => this
+      .replaceAll(RegExp(' +'), ' ')
+      .split(" ")
+      .map((str) => str.inCaps)
+      .join(" ");
+}
+
 class ChatPage extends StatelessWidget {
   static Page page() => MaterialPage<void>(child: Chat());
 
@@ -93,8 +104,19 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
     void _handleSubmitted(String text) {
       _textController.clear();
       setState(() {
-        Message message =
-            new Message(userId: user.id, content: text, sendAt: DateTime.now());
+        String userName = "";
+        if (user.email != null) {
+          userName = user.email!
+              .split("@")[0]
+              .split(".")
+              .join(" ")
+              .capitalizeFirstofEach;
+        }
+        Message message = new Message(
+            userId: user.id,
+            userName: userName,
+            content: text,
+            sendAt: DateTime.now());
         print(message);
         BlocProvider.of<MessageBloc>(context).add(MessageEventInsert(message));
         print('insert ' + text);

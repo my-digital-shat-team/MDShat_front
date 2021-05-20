@@ -5,19 +5,22 @@ import 'package:flutter/material.dart';
 class Message extends StatelessWidget {
   final String uid;
   final String userId;
+  final String userName;
   final String content;
   final DateTime sendAt;
 
   Message(
       {required this.userId,
+      required this.userName,
       required this.content,
       required this.sendAt,
       this.uid = ""});
 
-  Message copyWith({userId, sendAt, content, uid}) {
+  Message copyWith({userId, sendAt, content, uid, userName}) {
     return Message(
       uid: uid ?? this.uid,
       userId: userId ?? this.userId,
+      userName: userName ?? this.userName,
       content: content ?? this.content,
       sendAt: sendAt ?? this.sendAt,
     );
@@ -28,6 +31,7 @@ class Message extends StatelessWidget {
       uid: json["uid"] as String,
       content: json["content"] as String,
       userId: json["userId"] as String,
+      userName: json["userName"] as String,
       sendAt: json["sendAt"] as DateTime,
     );
   }
@@ -37,6 +41,7 @@ class Message extends StatelessWidget {
         uid: snap.id,
         content: snap.data()!['content'],
         userId: snap.data()!['userId'],
+        userName: snap.data()!['userName'],
         sendAt: DateTime.parse(snap.data()!['sendAt'].toDate().toString()));
   }
 
@@ -46,6 +51,7 @@ class Message extends StatelessWidget {
       "content": this.content,
       "userId": this.userId,
       "sendAt": this.sendAt,
+      "userName": this.userName,
     };
   }
 
