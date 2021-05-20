@@ -111,7 +111,10 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
             Flexible(
               child: TextField(
                 controller: _textController,
-                onSubmitted: _handleSubmitted,
+                onSubmitted: (value) {
+                  _handleSubmitted(value);
+                  _focusNode.unfocus();
+                },
                 decoration:
                     InputDecoration.collapsed(hintText: 'Envoyer un message'),
                 focusNode: _focusNode,
@@ -121,7 +124,10 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
               margin: EdgeInsets.symmetric(horizontal: 4.0),
               child: IconButton(
                   icon: Icon(Icons.send, color: Color(0xfff2aabb7)),
-                  onPressed: () => _handleSubmitted(_textController.text)),
+                  onPressed: () {
+                    _handleSubmitted(_textController.text);
+                    _focusNode.unfocus();
+                  }),
             )
           ],
         ),
