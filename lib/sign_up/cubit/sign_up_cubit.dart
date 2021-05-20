@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:formz/formz.dart';
 import 'package:my_digital_shat/forms/models/confirmed_password.dart';
 import 'package:my_digital_shat/forms/models/email.dart';
@@ -12,6 +13,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit(this._authenticationRepository) : super(const SignUpState());
 
   final AuthenticationRepository _authenticationRepository;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   void emailChanged(String value) {
     final email = Email.dirty(value);
@@ -65,6 +67,10 @@ class SignUpCubit extends Cubit<SignUpState> {
         email: state.email.value,
         password: state.password.value,
       );
+      if (auth.currentUser != null) {
+        print('email sended');
+        auth.currentUser!.sendEmailVerification();
+      }
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on Exception {
       emit(state.copyWith(status: FormzStatus.submissionFailure));

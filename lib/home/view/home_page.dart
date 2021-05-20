@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_digital_shat/app/bloc/app_bloc.dart';
 import 'package:my_digital_shat/app/view/toolbar.dart';
+import 'package:my_digital_shat/login/view/login_page.dart';
 
 class HomePage extends StatefulWidget {
   static Page page() => MaterialPage<void>(child: HomePage());
@@ -27,7 +28,10 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             key: const Key('homePage_logout_iconButton'),
             icon: const Icon(Icons.exit_to_app),
-            onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
+            onPressed: () {
+              context.read<AppBloc>().add(AppLogoutRequested());
+              Navigator.of(context).push<void>(LoginPage.route());
+            },
           )
         ],
       ),

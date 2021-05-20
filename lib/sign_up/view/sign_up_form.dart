@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_digital_shat/login/cubit/login_cubit.dart';
+import 'package:my_digital_shat/login/login.dart';
 import 'package:my_digital_shat/sign_up/cubit/sign_up_cubit.dart';
 import 'package:my_digital_shat/widget/bezierContainer.dart';
 
@@ -28,7 +29,9 @@ class _SignUpFormState extends State<SignUpForm> {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Inscription réussie')),
+              const SnackBar(
+                  content: Text(
+                      'Inscription réussie, Merci d\'activer votre compte')),
             );
           context.read<LoginCubit>().logInWithCredentials();
         }
@@ -184,7 +187,10 @@ class _SignUpButton extends StatelessWidget {
                   primary: const Color(0xfff2aabb7),
                 ),
                 onPressed: state.status.isValidated
-                    ? () => context.read<SignUpCubit>().signUpFormSubmitted()
+                    ? () {
+                        context.read<SignUpCubit>().signUpFormSubmitted();
+                        Navigator.of(context).push<void>(LoginPage.route());
+                      }
                     : null,
               );
       },
