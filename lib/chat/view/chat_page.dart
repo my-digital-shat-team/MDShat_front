@@ -1,24 +1,33 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:my_digital_shat/src/model/message.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_digital_shat/chat/bloc/blocs.dart';
+import 'package:my_digital_shat/chat/widget/message/messages.dart';
+import 'package:my_digital_shat/home/view/home_page.dart';
 
-class MessagePage extends StatelessWidget {
-  const MessagePage({
-    Key key,
+class ChatPage extends StatelessWidget {
+  static Page page() => MaterialPage<void>(child: Chat());
+
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => Chat());
+  }
+
+  const ChatPage({
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChatScreen();
+    return Chat();
   }
 }
 
-class ChatScreen extends StatefulWidget {
+class Chat extends StatefulWidget {
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _ChatState createState() => _ChatState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  final List<Message> _messages = messages;
+class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -34,11 +43,9 @@ class _ChatScreenState extends State<ChatScreen> {
               ],
             ),
             Flexible(
-              child: ListView.builder(
-                padding: EdgeInsets.all(8.0),
-                reverse: true,
-                itemBuilder: (_, int index) => _messages[index],
-                itemCount: _messages.length,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Messages(),
               ),
             ),
             Divider(height: 1.0),
@@ -52,10 +59,15 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  @override
+  void afterFirstLayout(BuildContext context) {
+    BlocProvider.of<MessageBloc>(context).add(MessageEventQueryAll());
+  }
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        Navigator.of(context).push<void>(HomePage.route());
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -75,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildTextComposer() {
     return IconTheme(
-      data: IconThemeData(color: Theme.of(context).accentColor),
+      data: IconThemeData(color: Color(0xff0084ff)),
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
@@ -103,12 +115,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
-    Message message = Message(
-      sender: currentUser,
-      text: text,
-    );
     setState(() {
-      _messages.insert(0, message);
+      print('insert ' + text);
     });
     _focusNode.requestFocus();
   }
