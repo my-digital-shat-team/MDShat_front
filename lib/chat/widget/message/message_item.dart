@@ -9,7 +9,45 @@ class MessageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(message.content),
+      margin: EdgeInsets.only(bottom: 10.0),
+      decoration: BoxDecoration(
+          color: Color(0xff0084ff),
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 12.0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                "--:--",
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(left: 6.0),
+                  child: CircleAvatar(child: Text('J' + 'D'))),
+              Flexible(
+                fit: FlexFit.loose,
+                flex: 1,
+                child: Container(
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    message.content,
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            height: 20.0,
+          ),
+        ],
+      ),
     );
   }
 }
