@@ -31,7 +31,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ..showSnackBar(
               const SnackBar(
                   content: Text(
-                      'Inscription réussie, Merci d\'activer votre compte')),
+                      'Inscription réussie, merci d\'activer votre compte')),
             );
           context.read<LoginCubit>().logInWithCredentials();
         }
@@ -55,7 +55,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     SizedBox(height: height * .2),
                     _title(),
                     SizedBox(
-                      height: 50,
+                      height: 100,
                     ),
                     _EmailInput(),
                     const SizedBox(height: 8.0),
@@ -188,8 +188,12 @@ class _SignUpButton extends StatelessWidget {
                 ),
                 onPressed: state.status.isValidated
                     ? () {
-                        context.read<SignUpCubit>().signUpFormSubmitted();
-                        Navigator.of(context).push<void>(LoginPage.route());
+                        context
+                            .read<SignUpCubit>()
+                            .signUpFormSubmitted()
+                            .then((value) {
+                          Navigator.of(context).push<void>(LoginPage.route());
+                        });
                       }
                     : null,
               );

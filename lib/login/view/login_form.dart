@@ -163,19 +163,22 @@ class _LoginButton extends StatelessWidget {
                 child: const Text('Connexion'),
                 onPressed: state.status.isValidated
                     ? () {
-                        context.read<LoginCubit>().logInWithCredentials();
-                        if (auth.currentUser != null &&
-                            auth.currentUser!.emailVerified) {
-                          Navigator.of(context).push<void>(HomePage.route());
-                        } else {
-                          ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(
-                              const SnackBar(
-                                  content:
-                                      Text('Merci d\'activer votre compte')),
-                            );
-                        }
+                        context
+                            .read<LoginCubit>()
+                            .logInWithCredentials()
+                            .then((value) {
+                          if (auth.currentUser!.emailVerified) {
+                            Navigator.of(context).push<void>(HomePage.route());
+                          } else {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Text('Merci d\'activer votre compte')),
+                              );
+                          }
+                        });
                       }
                     : null,
               );
