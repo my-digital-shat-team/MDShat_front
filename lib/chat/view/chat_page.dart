@@ -1,9 +1,11 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_digital_shat/app/bloc/app_bloc.dart';
 import 'package:my_digital_shat/chat/bloc/blocs.dart';
 import 'package:my_digital_shat/chat/widget/message/messages.dart';
 import 'package:my_digital_shat/home/view/home_page.dart';
+import 'package:my_digital_shat/model/message.dart';
 
 class ChatPage extends StatelessWidget {
   static Page page() => MaterialPage<void>(child: Chat());
@@ -86,6 +88,20 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
   }
 
   Widget _buildTextComposer() {
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+
+    void _handleSubmitted(String text) {
+      _textController.clear();
+      setState(() {
+        Message message =
+            new Message(userId: user.id, content: text, sendAt: DateTime.now());
+        print(message);
+        BlocProvider.of<MessageBloc>(context).add(MessageEventInsert(message));
+        print('insert ' + text);
+      });
+      _focusNode.requestFocus();
+    }
+
     return IconTheme(
       data: IconThemeData(color: Color(0xff0084ff)),
       child: Container(
@@ -111,13 +127,5 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
         ),
       ),
     );
-  }
-
-  void _handleSubmitted(String text) {
-    _textController.clear();
-    setState(() {
-      print('insert ' + text);
-    });
-    _focusNode.requestFocus();
   }
 }
