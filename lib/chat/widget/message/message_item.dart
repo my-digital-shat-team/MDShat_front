@@ -20,7 +20,7 @@ class MessageItem extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
-                "--:--",
+                message.sendAt.toString(),
                 style: TextStyle(color: Colors.white, fontSize: 16.0),
               ),
             ),
