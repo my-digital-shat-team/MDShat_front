@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_digital_shat/home/view/home_page.dart';
 import 'package:my_digital_shat/login/cubit/login_cubit.dart';
 import 'package:my_digital_shat/sign_up/view/sign_up_page.dart';
 import 'package:my_digital_shat/widget/bezierContainer.dart';
@@ -141,6 +143,8 @@ class _LoginFormState extends State<LoginForm> {
 }
 
 class _LoginButton extends StatelessWidget {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
@@ -158,7 +162,21 @@ class _LoginButton extends StatelessWidget {
                 ),
                 child: const Text('Connexion'),
                 onPressed: state.status.isValidated
-                    ? () => context.read<LoginCubit>().logInWithCredentials()
+                    ? () {
+                        context.read<LoginCubit>().logInWithCredentials();
+                        if (auth.currentUser != null &&
+                            auth.currentUser!.emailVerified) {
+                          Navigator.of(context).push<void>(HomePage.route());
+                        } else {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Merci d\'activer votre compte')),
+                            );
+                        }
+                      }
                     : null,
               );
       },
