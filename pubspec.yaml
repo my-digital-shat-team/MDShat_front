@@ -29,7 +29,7 @@ dependencies:
   bubble: ^1.1.9+1
   faker: ^1.2.1
   cloud_firestore: ^1.0.7
-  material_design_icons_flutter: ^4.0.5955
+  material_design_icons_flutter: ^5.0.5955-rc.1
   bloc: ^7.0.0
   equatable: ^2.0.0
   flow_builder: ^0.0.2
