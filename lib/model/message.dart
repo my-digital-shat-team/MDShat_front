@@ -34,7 +34,7 @@ class Message extends StatelessWidget {
 
   static Message fromSnapshot(DocumentSnapshot snap) {
     return Message(
-        uid: snap.data()!['uid'],
+        uid: snap.id,
         content: snap.data()!['content'],
         userId: snap.data()!['userId'],
         sendAt: DateTime.parse(snap.data()!['sendAt'].toDate().toString()));
