@@ -78,17 +78,17 @@ class MessageItem extends StatelessWidget {
                       ? Color(0xFFB6B6B6)
                       : Color(0xff0084ff),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(6),
-                    bottomRight: Radius.circular(6),
-                    topRight: Radius.circular(message.isMine(user) ? 0 : 6),
-                    topLeft: Radius.circular(message.isMine(user) ? 6 : 0),
+                    bottomLeft: Radius.circular(25),
+                    bottomRight: Radius.circular(25),
+                    topRight: Radius.circular(message.isMine(user) ? 0 : 25),
+                    topLeft: Radius.circular(message.isMine(user) ? 25 : 0),
                   ),
                 ),
                 child: Container(
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width * 0.8),
                   margin: EdgeInsets.only(
-                      left: 12.0, right: 12.0, top: 7.0, bottom: 7.0),
+                      left: 16.0, right: 16.0, top: 12.0, bottom: 12.0),
                   child: Text(
                     message.content,
                     style: TextStyle(
