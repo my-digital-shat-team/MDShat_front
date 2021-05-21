@@ -1,4 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_digital_shat/model/message.dart';
@@ -12,6 +13,12 @@ extension DateHelpers on DateTime {
   }
 }
 
+extension UserHelper on Message {
+  bool isMine(user) {
+    return this.userId == user.id;
+  }
+}
+
 class MessageItem extends StatelessWidget {
   final Message message;
   final User user;
@@ -20,73 +27,81 @@ class MessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 5.0),
-          child: Align(
-            alignment: message.userId != user.id
-                ? Alignment.topLeft
-                : Alignment.topRight,
-            child: Row(
-              mainAxisAlignment: message.userId != user.id
-                  ? MainAxisAlignment.start
-                  : MainAxisAlignment.end,
-              children: [
-                Text(
-                  message.sendAt.isToday()
-                      ? new DateFormat("HH:mm").format(message.sendAt)
-                      : new DateFormat("EEEE d MMMM").format(message.sendAt),
-                  style: TextStyle(fontSize: 12.0),
-                ),
-                Text(" - "),
-                Text(
-                  message.userId != user.id ? message.userName : "Vous",
-                  style: TextStyle(fontSize: 12.0),
-                ),
-              ],
+    return Column(children: [
+      Container(
+        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+        child: Row(
+          mainAxisAlignment: message.isMine(user)
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
+          children: [
+            Text(
+              message.sendAt.isToday()
+                  ? new DateFormat.jm('fr_FR').format(message.sendAt)
+                  : new DateFormat.yMMMd('fr_FR').format(message.sendAt),
+              style: TextStyle(
+                fontSize: 12.0,
+                color: Color(0xff8d8d8d),
+              ),
             ),
-          ),
+            Text(
+              " - ",
+              style: TextStyle(
+                fontSize: 12.0,
+                color: Color(0xff8d8d8d),
+              ),
+            ),
+            Text(
+              message.isMine(user) ? "Vous" : message.userName,
+              style: TextStyle(
+                fontSize: 12.0,
+                color: Color(0xff8d8d8d),
+              ),
+            ),
+          ],
         ),
-        Container(
-          margin: EdgeInsets.only(bottom: 5.0),
-          decoration: BoxDecoration(
-            color: message.userId != user.id
-                ? Color(0xff0084ff)
-                : Color(0xFFB6B6B6),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-              topRight: Radius.circular(message.userId != user.id ? 20 : 0),
-              topLeft: Radius.circular(message.userId != user.id ? 0 : 20),
-            ),
-          ),
-          child: Column(
+      ),
+      Row(
+        mainAxisAlignment: message.isMine(user)
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: message.isMine(user)
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 1,
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      margin:
-                          EdgeInsets.only(left: 12.0, top: 7.0, bottom: 7.0),
-                      child: Text(
-                        message.content,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                        ),
-                      ),
+              Container(
+                margin: EdgeInsets.only(bottom: 5.0),
+                decoration: BoxDecoration(
+                  color: message.isMine(user)
+                      ? Color(0xFFB6B6B6)
+                      : Color(0xff0084ff),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(6),
+                    bottomRight: Radius.circular(6),
+                    topRight: Radius.circular(message.isMine(user) ? 0 : 6),
+                    topLeft: Radius.circular(message.isMine(user) ? 6 : 0),
+                  ),
+                ),
+                child: Container(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.8),
+                  margin: EdgeInsets.only(
+                      left: 12.0, right: 12.0, top: 7.0, bottom: 7.0),
+                  child: Text(
+                    message.content,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
-        ),
-      ],
-    );
+        ],
+      )
+    ]);
   }
 }
