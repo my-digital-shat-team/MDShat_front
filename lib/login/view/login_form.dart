@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -27,38 +28,46 @@ class _LoginFormState extends State<LoginForm> {
           }
         },
         child: Scaffold(
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                    top: -MediaQuery.of(context).size.height * .15,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer()),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .2),
-                        _title(),
-                        SizedBox(height: 100),
-                        _EmailInput(),
-                        _PasswordInput(),
-                        SizedBox(height: 20),
-                        _LoginButton(),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .055),
-                        _createAccountLabel(),
-                      ],
+          body: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: 500,
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: -MediaQuery.of(context).size.height * .15,
+                        right: -MediaQuery.of(context).size.width * .4,
+                        child: BezierContainer()),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .2),
+                            _title(),
+                            SizedBox(height: 100),
+                            _EmailInput(),
+                            _PasswordInput(),
+                            SizedBox(height: 20),
+                            _LoginButton(),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .055),
+                            _createAccountLabel(),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ));
   }
