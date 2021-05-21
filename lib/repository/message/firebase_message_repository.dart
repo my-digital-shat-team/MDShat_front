@@ -10,9 +10,7 @@ class FirebaseMessageRepository implements MessageRepository {
 
   @override
   Future<void> addNewMessage(Message message) {
-    final x = message.toJson();
-    x.remove("uid");
-    return messageCollection.add(x);
+    return messageCollection.add(message.toJson());
   }
 
   @override

@@ -51,6 +51,6 @@ class _MessagesState extends State<Messages> with AfterLayoutMixin<Messages> {
 
   @override
   void afterFirstLayout(BuildContext context) {
-    if (_scrollController.hasClients) scrollToBottom();
+    scrollToBottom();
   }
 }

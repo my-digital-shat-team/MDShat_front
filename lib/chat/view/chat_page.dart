@@ -102,25 +102,26 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
     final user = context.select((AppBloc bloc) => bloc.state.user);
 
     void _handleSubmitted(String text) {
-      _textController.clear();
-      setState(() {
-        String userName = "";
-        if (user.email != null) {
-          userName = user.email!
-              .split("@")[0]
-              .split(".")
-              .join(" ")
-              .capitalizeFirstofEach;
-        }
-        Message message = new Message(
-            userId: user.id,
-            userName: userName,
-            content: text,
-            sendAt: DateTime.now());
-        print(message);
-        BlocProvider.of<MessageBloc>(context).add(MessageEventInsert(message));
-        print('insert ' + text);
-      });
+      if (text != '') {
+        _textController.clear();
+        setState(() {
+          String userName = "";
+          if (user.email != null) {
+            userName = user.email!
+                .split("@")[0]
+                .split(".")
+                .join(" ")
+                .capitalizeFirstofEach;
+          }
+          Message message = new Message(
+              userId: user.id,
+              userName: userName,
+              content: text,
+              sendAt: DateTime.now());
+          BlocProvider.of<MessageBloc>(context)
+              .add(MessageEventInsert(message));
+        });
+      }
       _focusNode.requestFocus();
     }
 
@@ -136,6 +137,9 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
                 onSubmitted: (value) {
                   _handleSubmitted(value);
                   _focusNode.unfocus();
+                },
+                onTap: () {
+
                 },
                 decoration:
                     InputDecoration.collapsed(hintText: 'Envoyer un message'),
