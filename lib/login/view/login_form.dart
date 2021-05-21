@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -33,7 +34,7 @@ class _LoginFormState extends State<LoginForm> {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height,
-                width: 500,
+                width: kIsWeb ? 500 : MediaQuery.of(context).size.width,
                 child: Stack(
                   children: <Widget>[
                     Positioned(
