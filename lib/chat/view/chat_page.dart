@@ -138,9 +138,7 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
                   _handleSubmitted(value);
                   _focusNode.unfocus();
                 },
-                onTap: () {
-
-                },
+                onTap: () {},
                 decoration:
                     InputDecoration.collapsed(hintText: 'Envoyer un message'),
                 focusNode: _focusNode,
