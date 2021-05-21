@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_digital_shat/app/bloc/app_bloc.dart';
@@ -13,7 +12,7 @@ class Messages extends StatefulWidget {
   _MessagesState createState() => _MessagesState();
 }
 
-class _MessagesState extends State<Messages> with AfterLayoutMixin<Messages> {
+class _MessagesState extends State<Messages> {
   ScrollController _scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,8 @@ class _MessagesState extends State<Messages> with AfterLayoutMixin<Messages> {
   }
 
   @override
-  void afterFirstLayout(BuildContext context) {
-    if (_scrollController.hasClients) scrollToBottom();
+  void initState() {
+    super.initState();
+    scrollToBottom();
   }
 }

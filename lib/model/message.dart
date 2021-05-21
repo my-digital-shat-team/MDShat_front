@@ -47,7 +47,6 @@ class Message extends StatelessWidget {
 
   Map<String, Object> toJson() {
     return {
-      "uid": this.uid,
       "content": this.content,
       "userId": this.userId,
       "sendAt": this.sendAt,
