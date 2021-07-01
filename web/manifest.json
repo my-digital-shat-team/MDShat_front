@@ -1,8 +1,8 @@
 {
-    "name": "my_digital_shat",
-    "short_name": "my_digital_shat",
+    "name": "My Digital Shat",
+    "short_name": "MDS",
     "start_url": ".",
-    "description": "My Digital Shat the unique chat for MyDigitalSchool",
+    "description": "My Digital Shat is the unique chat for MyDigitalSchool",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
