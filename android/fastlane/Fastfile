@@ -6,7 +6,7 @@ platform :android do
       firebase_app_distribution(
           app: ENV["FIREBASE_APP_ID"],
           testers: "llanta.jeremy@gmail.com, mayeut@gmail.com, evan.jug@gmail.com, alexis.pannetier@hotmail.fr, dylan.tardif1@gmail.com, cedricbardaine@gmail.com, contact@guillaume-balas.fr",
-          release_notes: "🚀 Coucou Guillaume ! 🚀",
+          release_notes: "🚀 Un icon pour l'application ! 🚀",
           firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
           apk_path: "../build/app/outputs/apk/release/app-release.apk"
       )
